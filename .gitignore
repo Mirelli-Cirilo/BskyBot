@@ -1,0 +1,38 @@
+# Node modules
+node_modules/
+
+# Build output
+dist/
+
+# TypeScript configuration
+*.tsbuildinfo
+
+# Logs
+*.log
+logs/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Environment variables
+.env
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# IDE/editor folders
+.vscode/
+.idea/
+
+# Coverage directory used by tools like istanbul
+coverage/
+
+# npm package lock file (if you want to ignore it, which is less common)
+package-lock.json
+yarn.lock
+
+# Optional: OS-specific files
+*.swp
+*.swo
+*.swn
