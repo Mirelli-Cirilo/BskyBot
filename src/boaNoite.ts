@@ -37,11 +37,11 @@ async function main() {
 main();
 
 // Run this on a cron job
-const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
+const scheduleExpressionMinute = '*/2 * * * *'; // Run once every minute for testing
 
 
-const scheduleExpression = '0 12 * * *'; // Executa todos os dias à meio-dia
+const scheduleExpression = '0 13 * * *'; // Executa todos os dias às 13h
 
-const job = new CronJob(scheduleExpression, main);
+const job = new CronJob(scheduleExpression, main, null, true, 'America/Sao_Paulo');
 
 job.start();
