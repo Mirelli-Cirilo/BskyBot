@@ -15,7 +15,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
-    "start": "node dist/boaNoite.js",
+    "start": "node dist/boaNoite.ts",
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "vercel"
   },
