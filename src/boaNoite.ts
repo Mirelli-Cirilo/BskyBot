@@ -34,8 +34,6 @@ async function main() {
     console.log("Just posted!");
 }
 
-main();
-
 // Run this on a cron job
 const scheduleExpressionMinute = '*/2 * * * *'; // Run once every minute for testing
 
