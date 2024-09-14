@@ -2,33 +2,45 @@ import { BskyAgent } from '@atproto/api';
 import * as dotenv from 'dotenv';
 import { CronJob } from 'cron';
 import * as process from 'process';
-import { DateTime } from 'luxon';
+import axios from 'axios';
 
 dotenv.config();
 
-// Cria o Bluesky Agent
+// Create a Bluesky Agent 
 const agent = new BskyAgent({
     service: 'https://bsky.social',
 });
 
+async function getRandomQuote(): Promise<string>{
+
+    try {
+        const response = await axios.get('https://recite.onrender.com/api/v1/random');
+        const { quote, book, author } = response.data;
+        return `"${quote}" - ${author}, ${book}`; 
+    } catch (error) {
+        console.error('Erro ao obter citação:', error);
+        return 'Erro ao obter citação'; 
+    }
+}
+
 async function main() {
-    await agent.login({ 
-        identifier: process.env.BLUESKY_USERNAME!, 
-        password: process.env.BLUESKY_PASSWORD! 
+    await agent.login({ identifier: process.env.BLUESKY_USERNAME!, password: process.env.BLUESKY_PASSWORD! });
+
+    const quote = await getRandomQuote();
+
+    await agent.post({     
+        text: quote
     });
-
-    const dataAtual = DateTime.now().setZone('America/Sao_Paulo').toFormat("dd/MM/yyyy");
-
-
-    await agent.post({
-        text: `Bom dia! A data de hoje é: ${dataAtual}`
-    });
-
     console.log("Just posted!");
 }
 
-// Define a expressão cron para rodar todos os dias às 08:00 (10 da noite)
-const scheduleExpression = '0 8 * * *'; // Executa todos os dias às 08:00
+main();
+
+// Run this on a cron job
+const scheduleExpressionMinute = '* * * * *'; // Run once every minute for testing
+
+
+const scheduleExpression = '0 12 * * *'; // Executa todos os dias à meio-dia
 
 const job = new CronJob(scheduleExpression, main);
 
