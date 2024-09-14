@@ -14,5 +14,12 @@
       "src": "/api/(.*)",
       "dest": "/dist/$1"
     }
+  ],
+
+  "crons": [
+    {
+      "path": "/api/cron",
+      "schedule": "46 13 * * *" 
+    }
   ]
 }
