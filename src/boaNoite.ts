@@ -6,36 +6,28 @@ import { DateTime } from 'luxon';
 
 dotenv.config();
 
-// Cria o Bluesky Agent
+// Create a Bluesky Agent 
 const agent = new BskyAgent({
     service: 'https://bsky.social',
 });
 
 async function main() {
-    await agent.login({ 
-        identifier: process.env.BLUESKY_USERNAME!, 
-        password: process.env.BLUESKY_PASSWORD! 
-    });
+    await agent.login({ identifier: process.env.BLUESKY_USERNAME!, password: process.env.BLUESKY_PASSWORD! });
 
     const dataAtual = DateTime.now().setZone('America/Sao_Paulo').toFormat("dd/MM/yyyy");
 
-    await agent.post({
+    await agent.post({     
         text: `Boa noite! A data de hoje é: ${dataAtual}`
     });
-
     console.log("Just posted!");
 }
 
-// Executa o post imediatamente ao rodar o script
-main().then(() => {
-    // Define a expressão cron para rodar todos os dias às 23:00 (10 da noite)
-    const scheduleExpression = '0 22 * * *'; // Executa todos os dias às 23:00
+main();
 
-    const job = new CronJob(scheduleExpression, main, null, true, 'America/Sao_Paulo');
+// Agendamento cron job para rodar uma vez por dia à 23h
 
-    job.start();
+const scheduleExpression = '0 23 * * *'; // Executa todos os dias à 23h
 
-    console.log("Cron job iniciado. Postará diariamente às 22:00.");
-}).catch(err => {
-    console.error("Erro ao executar a função main:", err);
-});
+const job = new CronJob(scheduleExpression, main);
+
+job.start();
