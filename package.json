@@ -1,5 +1,12 @@
 {
-  
+  "name": "bskybot",
+  "version": "1.0.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "deploy": "vercel"
+  },
   "dependencies": {
     "@atproto/api": "^0.13.7",
     "cron": "^3.1.7",
@@ -9,15 +16,6 @@
     "@types/node": "^22.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.2"
-  },
-  "name": "bskybot",
-  "version": "1.0.0",
-  "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "start": "node dist/boaNoite.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "deploy": "vercel"
   },
   "keywords": [],
   "author": "",
