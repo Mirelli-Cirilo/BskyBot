@@ -16,10 +16,10 @@
     }
   ],
 
-  "crons": [
+  "cron": [
     {
       "path": "/api/cron",
-      "schedule": "52 13 * * *" 
+      "schedule": "0 14 * * *" 
     }
   ]
 }
