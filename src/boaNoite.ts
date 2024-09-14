@@ -17,7 +17,7 @@ async function main() {
         password: process.env.BLUESKY_PASSWORD! 
     });
 
-    const dataAtual = DateTime.now().toFormat("dd/MM/yyyy");
+    const dataAtual = DateTime.now().setZone('America/Sao_Paulo').toFormat("dd/MM/yyyy");
 
     await agent.post({
         text: `Boa noite! A data de hoje é: ${dataAtual}`
@@ -28,10 +28,10 @@ async function main() {
 
 // Executa o post imediatamente ao rodar o script
 main().then(() => {
-    // Define a expressão cron para rodar todos os dias às 22:00 (10 da noite)
-    const scheduleExpression = '0 22 * * *'; // Executa todos os dias às 22:00
+    // Define a expressão cron para rodar todos os dias às 23:00 (10 da noite)
+    const scheduleExpression = '0 22 * * *'; // Executa todos os dias às 23:00
 
-    const job = new CronJob(scheduleExpression, main);
+    const job = new CronJob(scheduleExpression, main, null, true, 'America/Sao_Paulo');
 
     job.start();
 
